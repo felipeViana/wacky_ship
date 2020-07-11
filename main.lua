@@ -6,6 +6,8 @@ DEBUG = false
 enemies = {}
 globalPlayerX = 0
 globalPlayerY = 0
+globalScore = 0
+globalHighScore = 0
 
 function love.load()
   enemyManager:load()
@@ -15,6 +17,10 @@ end
 function love.update(dt)
   enemyManager:update(dt)
   player:update(dt)
+
+  if globalScore > globalHighScore then
+    globalHighScore = globalScore
+  end
 end
 
 function love.draw()
@@ -32,7 +38,10 @@ function love.draw()
 
   love.graphics.setColor(colors.white)
   love.graphics.setNewFont(20)
-  love.graphics.print('wave ' .. globalWave, 650, 50)
+
+  love.graphics.print('wave ' .. globalWave, 650, 25)
+  love.graphics.print('score: ' .. globalScore, 605, 75)
+  love.graphics.print('high score: ' .. globalHighScore, 605, 125)
 end
 
 function love.keypressed(key)

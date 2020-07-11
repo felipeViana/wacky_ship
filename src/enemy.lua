@@ -23,6 +23,12 @@ enemy.meta = {
 function enemy.new(type)
   local initialX = lume.random(constants.screenMinX + ENEMY_WIDTH/2, constants.screenMaxX - ENEMY_WIDTH/2)
   local initialY = lume.random(constants.screenMinY - ENEMY_HEIGHT/2, constants.screenMinY - ENEMY_HEIGHT/2 - MAX_SPAWN_DISTANCE)
+  local score
+  if type == 'red' or type == 'green' then
+    score = 1
+  else
+    score = 2
+  end
 
   local newEnemy = {
     id = lume.uuid(),
@@ -33,6 +39,7 @@ function enemy.new(type)
     timeAlive = 0,
     initialX = initialX,
     initialY = initialY,
+    score = score,
   }
   setmetatable(newEnemy, enemy.meta)
   return newEnemy
@@ -45,6 +52,7 @@ local function destroyEnemy(self)
   for index, enemyInstance in pairs(enemies) do
     if enemyInstance.id == self.id then
       table.remove(enemies, index)
+      globalScore = globalScore + self.score
     end
   end
 end

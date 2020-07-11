@@ -106,16 +106,11 @@ function player:draw()
 
   drawUtils.drawLifeBar(self.life)
 
-  drawUtils.drawShipDamageInfo(self.state)
+  drawUtils.drawShipDamageInfo(self)
 
-  love.graphics.setColor(colors.white)
-  love.graphics.rectangle(
-    'fill',
-    self.x - PLAYER_WIDTH/2,
-    self.y - PLAYER_HEIGHT/2,
-    PLAYER_WIDTH,
-    PLAYER_HEIGHT
-  )
+  drawUtils.drawPlayer(self, PLAYER_WIDTH, PLAYER_HEIGHT)
+
+
 end
 
 function player:keypressed(key)
