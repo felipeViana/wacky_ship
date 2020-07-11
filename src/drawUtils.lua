@@ -187,8 +187,8 @@ function drawUtils.drawShipDamageInfo(self)
 end
 
 function drawUtils.drawPlayer(self, width, height)
-  local originX = self.x
-  local originY = self.y
+  local originX = self.x - width/2
+  local originY = self.y - height/2
 
   drawBiggerTriangle(originX, originY, width, height, self.life)
   drawThruster(originX, originY, width, height, self.state.up)

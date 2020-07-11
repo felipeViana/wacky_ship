@@ -43,6 +43,19 @@ end
 function player:load()
 end
 
+function player:reset()
+  self.x = 300
+  self.y = 600
+  self.life = 4
+  self.invicibilityLeft = 0
+  self.state = {
+    up = 'normal',
+    right = 'normal',
+    down = 'normal',
+    left = 'normal',
+  }
+end
+
 function player:unload()
 end
 
@@ -64,7 +77,8 @@ local function getHit(self)
   self.invicibilityLeft = INVICIBILITY_TIME
 
   if self.life < 0 then
-    love.event.quit(0)
+    -- love.event.quit(0)
+    globalGameState = 'gameOver'
   end
 end
 
