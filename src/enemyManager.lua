@@ -1,6 +1,6 @@
 local colors = require 'src/colors'
 local lume = require 'libs/lume'
-local enemyRed = require 'src/enemyRed'
+local enemyCreator = require 'src/enemy'
 
 local enemyManager = {
 }
@@ -21,12 +21,15 @@ local function addNewEnemyToTable(self, newEnemy)
   )
 end
 
-function enemyManager:newEnemy(type)
+function enemyManager:newEnemy(enemyType)
   local newEnemy
-  if type == 'red' then
-    newEnemy = enemyRed.new()
+  if enemyType == 'red' then
+    newEnemy = enemyCreator.new('red')
+  elseif enemyType == 'green' then
+    newEnemy = enemyCreator.new('green')
   else
-    error('invalid type')
+    print(enemyType)
+    error('invalid enemy type')
   end
   addNewEnemyToTable(self, newEnemy)
   return newEnemy
@@ -39,7 +42,15 @@ local function createEnemies()
   local quantity = lume.random(5, 10)
 
   for i = 0, quantity do
-    enemyManager:newEnemy('red')
+    local enemyType = math.floor(lume.random(0, 2))
+    if enemyType == 0 then
+      enemyManager:newEnemy('red')
+    elseif enemyType == 1 then
+      enemyManager:newEnemy('green')
+    else
+      print(enemyType)
+      error('invalid enemy type')
+    end
   end
 end
 
