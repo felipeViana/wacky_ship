@@ -2,6 +2,7 @@ local lume = require 'libs/lume'
 local colors = require 'src/colors'
 local controls = require 'src/controls'
 local collisions = require 'src/collisions'
+local drawUtils = require 'src/drawUtils'
 
 local PLAYER_WIDTH = 50;
 local PLAYER_HEIGHT = 50;
@@ -61,6 +62,10 @@ local function getHit(self)
   damageShip(self)
   self.life = self.life - 1
   self.invicibilityLeft = INVICIBILITY_TIME
+
+  if self.life < 0 then
+    love.event.quit(0)
+  end
 end
 
 function player:update(dt)
@@ -96,15 +101,9 @@ function player:draw()
     love.graphics.print('invicibilityLeft = ' .. self.invicibilityLeft, 0, 40)
   end
 
-  love.graphics.setNewFont(20)
-  love.graphics.setColor(colors.black)
-  love.graphics.print('life = ' .. self.life, 650, 200)
+  drawUtils.drawLifeBar(self.life)
 
-  love.graphics.print('up = ' .. self.state.up, 600, 300)
-  love.graphics.print('left = ' .. self.state.left, 600, 350)
-  love.graphics.print('right = ' .. self.state.right, 600, 400)
-  love.graphics.print('down = ' .. self.state.down, 600, 450)
-
+  drawUtils.drawShipDamageInfo(self.state)
 
   love.graphics.setColor(colors.white)
   love.graphics.rectangle(

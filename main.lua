@@ -7,8 +7,6 @@ enemies = {}
 
 function love.load()
   enemyManager:load()
-  -- enemyManager:newEnemy('red')
-  -- enemyManager:newEnemy('red')
   player:load()
 end
 
