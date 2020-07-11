@@ -31,6 +31,8 @@ function enemyManager:newEnemy(enemyType)
     newEnemy = enemyCreator.new('green')
   elseif enemyType == 'purple' then
     newEnemy = enemyCreator.new('purple')
+  elseif enemyType == 'blue' then
+    newEnemy = enemyCreator.new('blue')
   else
     print(enemyType)
     error('invalid enemy type')
@@ -44,13 +46,12 @@ end
 
 local function createEnemies()
   local enemyTypes = {
-    'red', 'green', 'purple'
+    'red', 'green', 'purple', 'blue'
   }
   local quantity = lume.random(5, 10)
 
   for i = 0, quantity do
-    local enemyType = math.floor(lume.random(1, 4))
-    print(lume.serialize(enemyTypes))
+    local enemyType = math.floor(lume.random(1, 5))
     enemyManager:newEnemy(enemyTypes[enemyType])
   end
 

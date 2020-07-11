@@ -2,7 +2,7 @@ local player = (require 'src/player').new()
 local enemyManager = (require 'src/enemyManager').new()
 local colors = require 'src/colors'
 
-DEBUG = true
+DEBUG = false
 enemies = {}
 
 function love.load()

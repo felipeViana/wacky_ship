@@ -9,6 +9,7 @@ local constants = require 'src/constants'
 local enemyRed = require 'src/enemyRed'
 local enemyGreen = require 'src/enemyGreen'
 local enemyPurple = require 'src/enemyPurple'
+local enemyBlue = require 'src/enemyBlue'
 
 local enemy = {
   id,
@@ -48,6 +49,8 @@ local function updateForType(dt, type, y)
     return enemyGreen.update(dt, y)
   elseif type == 'purple' then
     return enemyPurple.update(dt, y)
+  elseif type == 'blue' then
+    return enemyBlue.update(dt, y)
   else
     error('invalid enemy type at update')
   end
@@ -78,6 +81,13 @@ function enemy:draw()
     )
   elseif self.type == 'purple' then
     enemyPurple.draw(
+      self.x,
+      self.y,
+      ENEMY_WIDTH,
+      ENEMY_HEIGHT
+    )
+  elseif self.type == 'blue' then
+    enemyBlue.draw(
       self.x,
       self.y,
       ENEMY_WIDTH,
