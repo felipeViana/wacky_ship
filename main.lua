@@ -11,6 +11,8 @@ globalScore = 0
 globalHighScore = 0
 globalGameState = 'menu' -- [inGame, paused, menu, gameOver]
 
+local timePassed = 0
+
 function love.load()
   enemyManager:load()
   player:load()
@@ -26,11 +28,13 @@ function love.update(dt)
       globalHighScore = globalScore
     end
   end
+
+  timePassed = timePassed + dt
 end
 
 function love.draw()
   if globalGameState == 'menu' then
-    menu.draw()
+    menu.draw(timePassed)
   end
 
   if globalGameState == 'inGame' or globalGameState == 'gameOver' or globalGameState == 'paused' then

@@ -13,4 +13,19 @@ local colors = {
   white = {1, 1, 1},
 }
 
+local rainbowColors = {
+  colors.red,
+  colors.orange,
+  colors.yellow,
+  colors.green,
+  colors.blue,
+  colors.indigo,
+  colors.violet,
+  colors.white,
+}
+
+function colors.getRainbowColors()
+  return rainbowColors
+end
+
 return colors;
