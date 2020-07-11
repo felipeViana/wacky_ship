@@ -5,7 +5,7 @@ local collisions = require 'src/collisions'
 local drawUtils = require 'src/drawUtils'
 
 local PLAYER_WIDTH = 50;
-local PLAYER_HEIGHT = 50;
+local PLAYER_HEIGHT = 200/3;
 local SPEED = 200;
 local isColliding = false
 local INVICIBILITY_TIME = 1
