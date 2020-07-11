@@ -1,4 +1,5 @@
 local player = (require 'src/player').new()
+local colors = require 'src/colors'
 
 function love.load()
   player:load()
@@ -9,6 +10,15 @@ function love.update(dt)
 end
 
 function love.draw()
+  love.graphics.setColor(colors.violet)
+  love.graphics.rectangle(
+    'fill',
+    600,
+    0,
+    200,
+    800
+  )
+
   player:draw()
 end
 

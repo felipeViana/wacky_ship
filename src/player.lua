@@ -1,4 +1,5 @@
 local lume = require 'libs/lume'
+local colors = require 'src/colors'
 
 local PLAYER_WIDTH = 50;
 local PLAYER_HEIGHT = 50;
@@ -16,8 +17,8 @@ player.meta = {
 
 function player.new()
   local newPlayer = {
-    x = 100,
-    y = 500,
+    x = 300,
+    y = 600,
     velocityX = 0,
     velocityY = 0,
   }
@@ -52,13 +53,31 @@ function player:update(dt)
 
   self.x = self.x + self.velocityX * dt
   self.y = self.y + self.velocityY * dt
+
+  -- screen boundaries
+  if self.x + PLAYER_WIDTH/2 > 600 then
+    self.x = 600 - PLAYER_WIDTH/2
+  end
+
+  if self.x - PLAYER_WIDTH/2 < 0 then
+    self.x = 0 + PLAYER_WIDTH/2
+  end
+
+  if self.y - PLAYER_HEIGHT/2 < 0 then
+    self.y = 0 + PLAYER_HEIGHT/2
+  end
+
+  if self.y + PLAYER_HEIGHT/2 > 800 then
+    self.y = 800 - PLAYER_HEIGHT/2
+  end
 end
 
 function player:draw()
+  love.graphics.setColor(colors.white)
   love.graphics.rectangle(
     'fill',
-    self.x,
-    self.y,
+    self.x - PLAYER_WIDTH/2,
+    self.y - PLAYER_HEIGHT/2,
     PLAYER_WIDTH,
     PLAYER_HEIGHT
   )
