@@ -8,7 +8,7 @@ function love.conf(t)
   t.window.width = 800
   t.window.height = 800
   t.window.fullscreen = false
-  -- t.window.icon = "assets/images/logo.png"
+  t.window.icon = "assets/logo.png"
   t.window.borderless = false
   t.window.resizable = false
 
