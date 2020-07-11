@@ -1,5 +1,4 @@
-local maxX = 600
-local maxY = 800
+local constants = require 'src/constants'
 
 local collisions = {}
 
@@ -7,20 +6,20 @@ function collisions.fitInScreen(x, y, width, height)
   local compX = x;
   local compY = y;
 
-  if x + width/2 > maxX then
-    compX = maxX - width/2
+  if x + width/2 > constants.screenMaxX then
+    compX = constants.screenMaxX - width/2
   end
 
-  if x - width/2 < 0 then
-    compX = 0 + width/2
+  if x - width/2 < constants.screenMinX then
+    compX = constants.screenMinX + width/2
   end
 
-  if y - height/2 < 0 then
-    compY = 0 + height/2
+  if y - height/2 < constants.screenMinY then
+    compY = constants.screenMinY + height/2
   end
 
-  if y + height/2 > maxY then
-    compY = maxY - height/2
+  if y + height/2 > constants.screenMaxY then
+    compY = constants.screenMaxY - height/2
   end
 
   return {
