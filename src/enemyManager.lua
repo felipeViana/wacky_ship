@@ -2,6 +2,8 @@ local colors = require 'src/colors'
 local lume = require 'libs/lume'
 local enemyCreator = require 'src/enemy'
 
+local wave = 0
+
 local enemyManager = {
 }
 enemyManager.meta = {
@@ -52,6 +54,8 @@ local function createEnemies()
       error('invalid enemy type')
     end
   end
+
+  wave = wave + 1
 end
 
 function enemyManager:update(dt)
@@ -66,8 +70,16 @@ end
 
 function enemyManager:draw()
   love.graphics.setColor(colors.white)
-  love.graphics.print(lume.serialize(enemies))
-  love.graphics.print('#enemies = ' .. #enemies, 0, 10)
+
+  if DEBUG then
+    love.graphics.setNewFont(12)
+    love.graphics.print(lume.serialize(enemies))
+    love.graphics.print('#enemies = ' .. #enemies, 0, 10)
+  end
+
+  love.graphics.setColor(colors.black)
+  love.graphics.setNewFont(20)
+  love.graphics.print('wave ' .. wave, 650, 50)
 
   for _, enemy in pairs(enemies) do
     enemy:draw()

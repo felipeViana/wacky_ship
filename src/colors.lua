@@ -1,4 +1,5 @@
 local colors = {
+  black = {0, 0, 0},
   red = {1, 0, 0},
   orange = {1, 165/255, 0},
   yellow = {1, 1, 0},

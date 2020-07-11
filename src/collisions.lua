@@ -28,4 +28,20 @@ function collisions.fitInScreen(x, y, width, height)
   }
 end
 
+local function isCollidingWithEnemy(x1, y1, x2, y2)
+  local d2 = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)
+  local r = 25
+  return d2 <= 4*r*r
+end
+
+function collisions.checkForCollisions(playerX, playerY)
+  for _, enemy in pairs(enemies) do
+    if isCollidingWithEnemy(enemy.x, enemy.y, playerX, playerY) then
+      return true
+    end
+  end
+
+  return false
+end
+
 return collisions;
