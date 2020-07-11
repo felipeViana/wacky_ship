@@ -1,5 +1,7 @@
 local lume = require 'libs/lume'
 local colors = require 'src/colors'
+local controls = require 'src/controls'
+local collisions = require 'src/collisions'
 
 local PLAYER_WIDTH = 50;
 local PLAYER_HEIGHT = 50;
@@ -10,6 +12,7 @@ local player = {
   y,
   velocityX,
   velocityY,
+  state,
 }
 player.meta = {
   __index = player,
@@ -21,6 +24,12 @@ function player.new()
     y = 600,
     velocityX = 0,
     velocityY = 0,
+    state = {
+      up = 'normal',
+      left = 'normal',
+      right = 'normal',
+      down = 'normal',
+    },
   }
   setmetatable(newPlayer, player.meta)
   return newPlayer
@@ -33,43 +42,16 @@ function player:unload()
 end
 
 function player:update(dt)
-  local velocityY = 0
-  if love.keyboard.isDown('w', 'up') then
-    velocityY = velocityY - SPEED
-  end
-  if love.keyboard.isDown('s', 'down') then
-    velocityY = velocityY + SPEED
-  end
-  self.velocityY = velocityY
-
-  local velocityX = 0
-  if love.keyboard.isDown('d', 'right') then
-    velocityX = velocityX + SPEED
-  end
-  if love.keyboard.isDown('a', 'left') then
-    velocityX = velocityX - SPEED
-  end
-  self.velocityX = velocityX
+   local velocity = controls.calculateVelocity(self.state)
+   self.velocityX = velocity.velocityX
+   self.velocityY = velocity.velocityY
 
   self.x = self.x + self.velocityX * dt
   self.y = self.y + self.velocityY * dt
 
-  -- screen boundaries
-  if self.x + PLAYER_WIDTH/2 > 600 then
-    self.x = 600 - PLAYER_WIDTH/2
-  end
-
-  if self.x - PLAYER_WIDTH/2 < 0 then
-    self.x = 0 + PLAYER_WIDTH/2
-  end
-
-  if self.y - PLAYER_HEIGHT/2 < 0 then
-    self.y = 0 + PLAYER_HEIGHT/2
-  end
-
-  if self.y + PLAYER_HEIGHT/2 > 800 then
-    self.y = 800 - PLAYER_HEIGHT/2
-  end
+  local finalPosition = collisions.fitInScreen(self.x, self.y, PLAYER_WIDTH, PLAYER_HEIGHT)
+  self.x = finalPosition.x
+  self.y = finalPosition.y
 end
 
 function player:draw()
