@@ -1,6 +1,7 @@
 local player = (require 'src/player').new()
 local enemyManager = (require 'src/enemyManager').new()
 local colors = require 'src/colors'
+local menu = require 'src/menu'
 
 DEBUG = false
 enemies = {}
@@ -8,7 +9,7 @@ globalPlayerX = 0
 globalPlayerY = 0
 globalScore = 0
 globalHighScore = 0
-globalGameState = 'inGame' -- [inGame, paused, menu, gameOver]
+globalGameState = 'menu' -- [inGame, paused, menu, gameOver]
 
 function love.load()
   enemyManager:load()
@@ -28,6 +29,9 @@ function love.update(dt)
 end
 
 function love.draw()
+  if globalGameState == 'menu' then
+    menu.draw()
+  end
 
   if globalGameState == 'inGame' or globalGameState == 'gameOver' or globalGameState == 'paused' then
     enemyManager:draw()
@@ -72,6 +76,10 @@ local function restartTheGame()
 end
 
 function love.keypressed(key)
+  if globalGameState == 'menu' then
+    globalGameState = 'inGame'
+  end
+
   if globalGameState == 'inGame' then
     player:keypressed(key)
   end
