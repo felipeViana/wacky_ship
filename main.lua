@@ -16,8 +16,8 @@ function love.load()
 end
 
 function love.update(dt)
-
   if globalGameState == 'inGame' then
+
     enemyManager:update(dt)
     player:update(dt)
 
@@ -29,7 +29,7 @@ end
 
 function love.draw()
 
-  if globalGameState == 'inGame' or globalGameState == 'gameOver' then
+  if globalGameState == 'inGame' or globalGameState == 'gameOver' or globalGameState == 'paused' then
     enemyManager:draw()
 
     love.graphics.setColor(colors.indigo)
@@ -54,6 +54,11 @@ function love.draw()
     love.graphics.print('GAME OVER', 250, 300)
     love.graphics.print('press R to restart the game', 200, 400)
   end
+
+  if globalGameState == 'paused' then
+    love.graphics.print('PAUSED', 250, 175)
+    love.graphics.print('press P to unpause', 200, 225)
+  end
 end
 
 local function restartTheGame()
@@ -76,7 +81,21 @@ function love.keypressed(key)
     restartTheGame()
   end
 
+  if key == 'p'then
+    if globalGameState == 'inGame' then
+      globalGameState = 'paused'
+    elseif globalGameState == 'paused' then
+      globalGameState = 'inGame'
+    end
+  end
+
   if key == 'escape' then
     love.event.quit(0)
+  end
+end
+
+function love.focus(f)
+  if not f and globalGameState == 'inGame' then
+    globalGameState = 'paused'
   end
 end
