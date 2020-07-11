@@ -29,6 +29,8 @@ function enemyManager:newEnemy(enemyType)
     newEnemy = enemyCreator.new('red')
   elseif enemyType == 'green' then
     newEnemy = enemyCreator.new('green')
+  elseif enemyType == 'purple' then
+    newEnemy = enemyCreator.new('purple')
   else
     print(enemyType)
     error('invalid enemy type')
@@ -41,18 +43,15 @@ function enemyManager:load()
 end
 
 local function createEnemies()
+  local enemyTypes = {
+    'red', 'green', 'purple'
+  }
   local quantity = lume.random(5, 10)
 
   for i = 0, quantity do
-    local enemyType = math.floor(lume.random(0, 2))
-    if enemyType == 0 then
-      enemyManager:newEnemy('red')
-    elseif enemyType == 1 then
-      enemyManager:newEnemy('green')
-    else
-      print(enemyType)
-      error('invalid enemy type')
-    end
+    local enemyType = math.floor(lume.random(1, 4))
+    print(lume.serialize(enemyTypes))
+    enemyManager:newEnemy(enemyTypes[enemyType])
   end
 
   wave = wave + 1
@@ -77,7 +76,7 @@ function enemyManager:draw()
     love.graphics.print('#enemies = ' .. #enemies, 0, 10)
   end
 
-  love.graphics.setColor(colors.black)
+  love.graphics.setColor(colors.white)
   love.graphics.setNewFont(20)
   love.graphics.print('wave ' .. wave, 650, 50)
 

@@ -16,7 +16,7 @@ function love.update(dt)
 end
 
 function love.draw()
-  love.graphics.setColor(colors.violet)
+  love.graphics.setColor(colors.indigo)
   love.graphics.rectangle(
     'fill',
     600,

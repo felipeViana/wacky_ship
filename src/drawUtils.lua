@@ -8,6 +8,11 @@ function drawUtils.drawLifeBar(life)
   local width = 50
   local heightTotal = 200 -- piece * 4
   local heightPiece = 50
+  local roundRadius = 5
+
+  love.graphics.setNewFont(20)
+  love.graphics.setColor(colors.white)
+  love.graphics.print('Life:', originX - 25, originY - 35)
 
   love.graphics.setColor(colors.black)
   love.graphics.rectangle(
@@ -15,7 +20,9 @@ function drawUtils.drawLifeBar(life)
     originX,
     originY,
     width,
-    heightTotal
+    heightTotal,
+    roundRadius,
+    roundRadius
   )
 
   love.graphics.setColor(colors.darkgray)
@@ -24,7 +31,9 @@ function drawUtils.drawLifeBar(life)
     originX,
     originY,
     width,
-    heightTotal
+    heightTotal,
+    roundRadius,
+    roundRadius
   )
 
   love.graphics.setColor(colors.red)
@@ -34,7 +43,9 @@ function drawUtils.drawLifeBar(life)
       originX,
       originY + heightTotal - life * heightPiece,
       width,
-      life * heightPiece
+      life * heightPiece,
+      roundRadius,
+      roundRadius
     )
   end
 end
@@ -175,12 +186,16 @@ function drawUtils.drawShipDamageInfo(state)
     height
   )
 
+  love.graphics.setNewFont(20)
+  love.graphics.setColor(colors.white)
+  love.graphics.print('Ship damage:', originX - 25, originY - 35)
+
   drawBiggerTriangle(originX, originY, width, height)
-  drawThruster(originX, originY, state.down)
+  drawThruster(originX, originY, state.up)
   drawLeftWing(originX, originY, state.left)
   drawRightWing(originX, originY, state.right)
-  drawLeftSmallWing(originX, originY, state.up)
-  drawRightSmallWing(originX, originY, state.up)
+  drawLeftSmallWing(originX, originY, state.down)
+  drawRightSmallWing(originX, originY, state.down)
 
 end
 

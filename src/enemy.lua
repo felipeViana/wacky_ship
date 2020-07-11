@@ -8,6 +8,7 @@ local lume = require 'libs/lume'
 local constants = require 'src/constants'
 local enemyRed = require 'src/enemyRed'
 local enemyGreen = require 'src/enemyGreen'
+local enemyPurple = require 'src/enemyPurple'
 
 local enemy = {
   id,
@@ -45,6 +46,8 @@ local function updateForType(dt, type, y)
     return enemyRed.update(dt, y)
   elseif type == 'green' then
     return enemyGreen.update(dt, y)
+  elseif type == 'purple' then
+    return enemyPurple.update(dt, y)
   else
     error('invalid enemy type at update')
   end
@@ -68,6 +71,13 @@ function enemy:draw()
     )
   elseif self.type == 'red' then
     enemyRed.draw(
+      self.x,
+      self.y,
+      ENEMY_WIDTH,
+      ENEMY_HEIGHT
+    )
+  elseif self.type == 'purple' then
+    enemyPurple.draw(
       self.x,
       self.y,
       ENEMY_WIDTH,
