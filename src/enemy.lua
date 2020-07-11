@@ -21,11 +21,18 @@ enemy.meta = {
 }
 
 function enemy.new(type)
+  local initialX = lume.random(constants.screenMinX + ENEMY_WIDTH/2, constants.screenMaxX - ENEMY_WIDTH/2)
+  local initialY = lume.random(constants.screenMinY - ENEMY_HEIGHT/2, constants.screenMinY - ENEMY_HEIGHT/2 - MAX_SPAWN_DISTANCE)
+
   local newEnemy = {
     id = lume.uuid(),
-    x = lume.random(constants.screenMinX + ENEMY_WIDTH/2, constants.screenMaxX - ENEMY_WIDTH/2),
-    y = lume.random(constants.screenMinY - ENEMY_HEIGHT/2, constants.screenMinY - ENEMY_HEIGHT/2 - MAX_SPAWN_DISTANCE),
+    x = initialX,
+    y = initialY,
     type = type,
+    direction = math.floor(lume.random(0, 2)),
+    timeAlive = 0,
+    initialX = initialX,
+    initialY = initialY,
   }
   setmetatable(newEnemy, enemy.meta)
   return newEnemy
@@ -42,22 +49,24 @@ local function destroyEnemy(self)
   end
 end
 
-local function updateForType(dt, type, y)
-  if type == 'red' then
-    return enemyRed.update(dt, y)
-  elseif type == 'green' then
-    return enemyGreen.update(dt, y)
-  elseif type == 'purple' then
-    return enemyPurple.update(dt, y)
-  elseif type == 'blue' then
-    return enemyBlue.update(dt, y)
+local function updateForType(dt, self)
+  if self.type == 'red' then
+    return enemyRed.update(dt, self)
+  elseif self.type == 'green' then
+    return enemyGreen.update(dt, self)
+  elseif self.type == 'purple' then
+    return enemyPurple.update(dt, self)
+  elseif self.type == 'blue' then
+    return enemyBlue.update(dt, self)
   else
     error('invalid enemy type at update')
   end
 end
 
 function enemy:update(dt)
-  self.y = updateForType(dt, self.type, self.y)
+  local position = updateForType(dt, self)
+  self.x = position.x
+  self.y = position.y
 
   if self.y > constants.screenMaxY + 100 then
     destroyEnemy(self)
@@ -84,7 +93,8 @@ function enemy:draw()
       self.x,
       self.y,
       ENEMY_WIDTH,
-      ENEMY_HEIGHT
+      ENEMY_HEIGHT,
+      self
     )
   elseif self.type == 'blue' then
     enemyBlue.draw(

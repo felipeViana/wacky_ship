@@ -88,6 +88,9 @@ function player:update(dt)
   if self.invicibilityLeft > -1 then
     self.invicibilityLeft = self.invicibilityLeft - dt
   end
+
+  globalPlayerX = self.x
+  globalPlayerY = self.y
 end
 
 function player:draw()

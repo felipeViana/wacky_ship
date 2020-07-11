@@ -4,6 +4,8 @@ local colors = require 'src/colors'
 
 DEBUG = false
 enemies = {}
+globalPlayerX = 0
+globalPlayerY = 0
 
 function love.load()
   enemyManager:load()
@@ -16,6 +18,8 @@ function love.update(dt)
 end
 
 function love.draw()
+  enemyManager:draw()
+
   love.graphics.setColor(colors.indigo)
   love.graphics.rectangle(
     'fill',
@@ -24,9 +28,11 @@ function love.draw()
     200,
     800
   )
-
-  enemyManager:draw()
   player:draw()
+
+  love.graphics.setColor(colors.white)
+  love.graphics.setNewFont(20)
+  love.graphics.print('wave ' .. globalWave, 650, 50)
 end
 
 function love.keypressed(key)

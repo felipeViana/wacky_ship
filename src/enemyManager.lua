@@ -2,7 +2,7 @@ local colors = require 'src/colors'
 local lume = require 'libs/lume'
 local enemyCreator = require 'src/enemy'
 
-local wave = 0
+globalWave = 0
 
 local enemyManager = {
 }
@@ -51,11 +51,11 @@ local function createEnemies()
   local quantity = lume.random(5, 10)
 
   for i = 0, quantity do
-    local enemyType = math.floor(lume.random(1, 5))
+    local enemyType = math.floor(lume.random(1, #enemyTypes+1))
     enemyManager:newEnemy(enemyTypes[enemyType])
   end
 
-  wave = wave + 1
+  globalWave = globalWave + 1
 end
 
 function enemyManager:update(dt)
@@ -76,10 +76,6 @@ function enemyManager:draw()
     love.graphics.print(lume.serialize(enemies))
     love.graphics.print('#enemies = ' .. #enemies, 0, 10)
   end
-
-  love.graphics.setColor(colors.white)
-  love.graphics.setNewFont(20)
-  love.graphics.print('wave ' .. wave, 650, 50)
 
   for _, enemy in pairs(enemies) do
     enemy:draw()
