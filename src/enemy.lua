@@ -36,7 +36,7 @@ function enemy.new(type)
     y = initialY,
     type = type,
     direction = math.floor(lume.random(0, 2)),
-    timeAlive = 0,
+    timeAlive = 0 + lume.random(0, 2),
     initialX = initialX,
     initialY = initialY,
     score = score,

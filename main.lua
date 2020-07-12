@@ -65,7 +65,7 @@ function love.draw()
 
   if globalGameState == 'paused' then
     love.graphics.print('PAUSED', 250, 175)
-    love.graphics.print('press P to unpause', 200, 225)
+    love.graphics.print('press P or ESC to unpause', 200, 225)
   end
 end
 
@@ -75,6 +75,7 @@ local function restartTheGame()
   globalPlayerX = 0
   globalPlayerY = 0
   globalScore = 0
+  globalWave = 0
 
   player:reset()
 end
@@ -93,7 +94,7 @@ function love.keypressed(key)
     restartTheGame()
   end
 
-  if key == 'p'then
+  if key == 'p' or key == 'escape' then
     if globalGameState == 'inGame' then
       globalGameState = 'paused'
     elseif globalGameState == 'paused' then
@@ -101,7 +102,7 @@ function love.keypressed(key)
     end
   end
 
-  if key == 'escape' then
+  if DEBUG and key == 'escape' then
     love.event.quit(0)
   end
 end

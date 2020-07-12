@@ -67,7 +67,7 @@ local function drawBiggerTriangle(originX, originY, width, height, life)
     'line',
     positions
   )
-  love.graphics.setColor(colors.white)
+  love.graphics.setColor(colors.darkgray)
   if life < 0 then
     love.graphics.setColor(colors.red)
   end
@@ -83,7 +83,7 @@ local function drawPolygon(positions, state)
     'line',
     positions
   )
-  love.graphics.setColor(colors.white)
+  love.graphics.setColor(colors.darkgray)
   if state == 'damaged' then
     love.graphics.setColor(colors.red)
   end

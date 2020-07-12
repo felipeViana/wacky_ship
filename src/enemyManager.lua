@@ -45,10 +45,52 @@ function enemyManager:load()
 end
 
 local function createEnemies()
-  local enemyTypes = {
+  local enemyTypesInitial = {
+    'red', 'green'
+  }
+  local allEnemyTypes = {
     'red', 'green', 'purple', 'blue'
   }
-  local quantity = lume.random(5, 10)
+
+  local enemyTypes
+  if globalWave < 3 then
+    enemyTypes = enemyTypesInitial
+  else
+    enemyTypes = allEnemyTypes
+  end
+
+  local minEnemies
+  local maxEnemies
+  if globalWave < 2 then
+    minEnemies = 3
+    maxEnemies = 6
+  elseif globalWave < 4 then
+    minEnemies = 6
+    maxEnemies = 10
+  elseif globalWave < 6 then
+    minEnemies = 10
+    maxEnemies = 14
+  elseif globalWave < 8 then
+    minEnemies = 14
+    maxEnemies = 18
+  elseif globalWave < 10 then
+    minEnemies = 18
+    maxEnemies = 26
+  elseif globalWave < 12 then
+    minEnemies = 26
+    maxEnemies = 34
+  elseif globalWave < 14 then
+    minEnemies = 34
+    maxEnemies = 45
+  elseif globalWave < 16 then
+    minEnemies = 45
+    maxEnemies = 65
+  else
+    minEnemies = 65
+    maxEnemies = 100
+  end
+
+  local quantity = lume.random(minEnemies, maxEnemies)
 
   for i = 0, quantity do
     local enemyType = math.floor(lume.random(1, #enemyTypes+1))
