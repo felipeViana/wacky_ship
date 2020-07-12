@@ -3,6 +3,7 @@ local colors = require 'src/colors'
 local controls = require 'src/controls'
 local collisions = require 'src/collisions'
 local drawUtils = require 'src/drawUtils'
+local soundManager = require 'src/soundManager'
 
 local PLAYER_WIDTH = 50;
 local PLAYER_HEIGHT = 200/3;
@@ -79,6 +80,8 @@ local function getHit(self)
   if self.life < 0 then
     -- love.event.quit(0)
     globalGameState = 'gameOver'
+  else
+    soundManager.playSound(shipDamageSound)
   end
 end
 

@@ -14,6 +14,8 @@ globalGameState = 'menu' -- [inGame, paused, menu, gameOver]
 local timePassed = 0
 
 function love.load()
+  shipDamageSound = love.audio.newSource("assets/shipDamage.wav", "static")
+
   enemyManager:load()
   player:load()
 end
