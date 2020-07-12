@@ -33,18 +33,9 @@ function enemy.update(dt, self)
 end
 
 function enemy.draw(x, y, width, height)
-  love.graphics.setColor(colors.green)
-  love.graphics.polygon(
-    'fill',
-    x - width/2,
-    y - height/2,
+  love.graphics.setColor(1, 1, 1)
+  love.graphics.draw(greenShipImage, x - width/2, y - height/2, math.pi)
 
-    x + width/2,
-    y - height/2,
-
-    x,
-    y + height/2
-  )
 end
 
 

@@ -15,6 +15,7 @@ local timePassed = 0
 
 function love.load()
   shipDamageSound = love.audio.newSource("assets/shipDamage.wav", "static")
+  greenShipImage = love.graphics.newImage("assets/greenShip.jpeg")
 
   enemyManager:load()
   player:load()
