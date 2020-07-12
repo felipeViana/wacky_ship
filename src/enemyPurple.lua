@@ -28,15 +28,8 @@ function enemy.update(dt, self)
 end
 
 function enemy.draw(x, y, width, height, self)
-  love.graphics.setColor(colors.indigo)
-
-  love.graphics.rectangle(
-    'fill',
-    x - width/2,
-    y - height/2,
-    width,
-    height
-  )
+  love.graphics.setColor(1, 1, 1)
+  love.graphics.draw(purpleShipImage, x + width/2, y + height/2, math.pi)
 end
 
 

@@ -26,6 +26,7 @@ function menu.draw(timePassed)
 
   love.graphics.print('Controls:', 100, 615)
   love.graphics.print('WASD or arrow keys to move', 100, 660)
+  love.graphics.print('SPACE to shoot', 100, 690)
 end
 
 

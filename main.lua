@@ -22,6 +22,7 @@ function love.load()
 
   greenShipImage = love.graphics.newImage("assets/greenShip.png")
   redShipImage = love.graphics.newImage("assets/redShip.png")
+  purpleShipImage = love.graphics.newImage("assets/purpleShip.png")
 
   enemyManager:load()
   player:load()
