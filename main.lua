@@ -21,6 +21,7 @@ function love.load()
   music:setLooping(true)
 
   greenShipImage = love.graphics.newImage("assets/greenShip.png")
+  redShipImage = love.graphics.newImage("assets/redShip.png")
 
   enemyManager:load()
   player:load()

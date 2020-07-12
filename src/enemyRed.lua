@@ -17,14 +17,8 @@ function enemy.update(dt, self)
 end
 
 function enemy.draw(x, y, width, height)
-  love.graphics.setColor(colors.red)
-  love.graphics.rectangle(
-    'fill',
-    x - width/2,
-    y - height/2,
-    width,
-    height
-  )
+  love.graphics.setColor(1, 1, 1)
+  love.graphics.draw(redShipImage, x - width/2, y - height/2)
 end
 
 

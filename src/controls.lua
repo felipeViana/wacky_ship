@@ -52,11 +52,7 @@ end
 
 
 function controls.calculateVelocity(state)
-
   return normalMovement(state);
-
-
-  -- error('invalid state passed to controls')
 end
 
 return controls;
