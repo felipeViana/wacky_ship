@@ -29,9 +29,13 @@ function collisions.fitInScreen(x, y, width, height)
 end
 
 local function isCollidingWithEnemy(x1, y1, x2, y2)
+  if math.abs(x1-x2) > 100 or math.abs(y1-y2) > 100 then
+    return false
+  end
+
   local d2 = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)
-  local r = 25
-  return d2 <= 4*r*r
+  local r = 50
+  return d2 <= r*r
 end
 
 function collisions.checkForCollisions(playerX, playerY)

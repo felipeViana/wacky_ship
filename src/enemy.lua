@@ -25,9 +25,9 @@ function enemy.new(type)
   local initialY = lume.random(constants.screenMinY - ENEMY_HEIGHT/2, constants.screenMinY - ENEMY_HEIGHT/2 - MAX_SPAWN_DISTANCE)
   local score
   if type == 'red' or type == 'green' then
-    score = 1
+    score = 10
   else
-    score = 2
+    score = 20
   end
 
   local newEnemy = {

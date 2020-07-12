@@ -3,7 +3,7 @@ local enemyManager = (require 'src/enemyManager').new()
 local colors = require 'src/colors'
 local menu = require 'src/menu'
 
-DEBUG = false
+DEBUG = true
 enemies = {}
 globalPlayerX = 0
 globalPlayerY = 0
@@ -81,7 +81,7 @@ local function restartTheGame()
 end
 
 function love.keypressed(key)
-  if globalGameState == 'menu' then
+  if globalGameState == 'menu' and key == 'return' then
     globalGameState = 'inGame'
   end
 

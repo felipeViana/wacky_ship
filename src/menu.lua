@@ -22,7 +22,7 @@ function menu.draw(timePassed)
   love.graphics.print("You're navigating your spaceship battling against waves of enemies", 50, 200)
   love.graphics.print('you gradually lose control of your ship whenever it gets damaged.', 50, 250)
 
-  love.graphics.print('press any key to start the game', 200, 450)
+  love.graphics.print('press ENTER to start the game', 200, 450)
 
   love.graphics.print('Controls:', 100, 615)
   love.graphics.print('WASD or arrow keys to move', 100, 660)

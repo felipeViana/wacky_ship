@@ -1,5 +1,6 @@
 function love.conf(t)
   t.identity = nil -- save directory (string)
+  t.author = 'felipeViana'
   t.accelerometerjoystick = false
   t.title = "Wacky Ship"
   t.version = "11.3"
