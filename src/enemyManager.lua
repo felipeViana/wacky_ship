@@ -49,7 +49,7 @@ local function createEnemies()
     'red', 'green'
   }
   local allEnemyTypes = {
-    'red', 'green', 'purple', 'blue'
+    'red', 'green', 'purple'
   }
 
   local enemyTypes

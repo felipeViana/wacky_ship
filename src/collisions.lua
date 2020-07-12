@@ -48,4 +48,35 @@ function collisions.checkForCollisions(playerX, playerY)
   return false
 end
 
+local function isShootCollidingWithEnemy(x1, y1, x2, y2)
+  if math.abs(x1-x2) > 100 or math.abs(y1-y2) > 100 then
+    return false
+  end
+
+
+  local d2 = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)
+  local r = 32
+  return d2 <= r*r
+end
+
+local function killEnemy(enemyId)
+  for index, enemyInstance in pairs(enemies) do
+    if enemyInstance.id == enemyId then
+      globalScore = globalScore + enemyInstance.score
+      table.remove(enemies, index)
+    end
+  end
+end
+
+function collisions.checkForShoot()
+  for _, enemy in pairs(enemies) do
+    if isShootCollidingWithEnemy(enemy.x, enemy.y, shootX, shootY) then
+      killEnemy(enemy.id)
+      return true
+    end
+  end
+
+  return false
+end
+
 return collisions;

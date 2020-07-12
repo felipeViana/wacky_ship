@@ -11,12 +11,17 @@ local SPEED = 200;
 local isColliding = false
 local INVICIBILITY_TIME = 1
 
+local shootSpeed = 300
+shootX=0
+shootY=0
+
 local player = {
   x,
   y,
   velocityX,
   velocityY,
   state,
+  shooting,
 }
 player.meta = {
   __index = player,
@@ -36,6 +41,7 @@ function player.new()
     },
     life = 4,
     invicibilityLeft = 0,
+    shooting = false,
   }
   setmetatable(newPlayer, player.meta)
   return newPlayer
@@ -49,6 +55,8 @@ function player:reset()
   self.y = 600
   self.life = 4
   self.invicibilityLeft = 0
+  self.shooting = false
+
   self.state = {
     up = 'normal',
     right = 'normal',
@@ -99,6 +107,15 @@ function player:update(dt)
   self.x = finalPosition.x
   self.y = finalPosition.y
 
+  shootY = shootY - shootSpeed * dt
+  isShootColliding = collisions.checkForShoot()
+  if isShootColliding or shootY < 0 then
+    shootY = 0
+    shootX = 0
+
+    self.shooting = false
+  end
+
   isColliding = collisions.checkForCollisions(self.x, self.y)
   if isColliding and self.invicibilityLeft <= 0 then
     getHit(self)
@@ -123,16 +140,34 @@ function player:draw()
     love.graphics.print('invicibilityLeft = ' .. self.invicibilityLeft, 0, 40)
   end
 
+  love.graphics.setColor(colors.white)
+  love.graphics.circle(
+    'fill',
+    shootX,
+    shootY,
+    5
+  )
+
   drawUtils.drawLifeBar(self.life)
 
   drawUtils.drawShipDamageInfo(self)
 
   drawUtils.drawPlayer(self, PLAYER_WIDTH, PLAYER_HEIGHT)
+end
 
+local function createShoot(self)
+  shootY=self.y-30
+  shootX=self.x
 
+  self.shooting = true
 end
 
 function player:keypressed(key)
+  if key == 'space' then
+    if not self.shooting then
+      createShoot(self)
+    end
+  end
 end
 
 return player;

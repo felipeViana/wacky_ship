@@ -3,7 +3,7 @@ local enemyManager = (require 'src/enemyManager').new()
 local colors = require 'src/colors'
 local menu = require 'src/menu'
 
-DEBUG = true
+DEBUG = false
 enemies = {}
 globalPlayerX = 0
 globalPlayerY = 0
