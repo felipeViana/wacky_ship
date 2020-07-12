@@ -79,6 +79,7 @@ local function getHit(self)
 
   if self.life < 0 then
     -- love.event.quit(0)
+    soundManager.playSound(shipExplosionSound)
     globalGameState = 'gameOver'
   else
     soundManager.playSound(shipDamageSound)

@@ -34,7 +34,7 @@ end
 
 function enemy.draw(x, y, width, height)
   love.graphics.setColor(1, 1, 1)
-  love.graphics.draw(greenShipImage, x - width/2, y - height/2, math.pi)
+  love.graphics.draw(greenShipImage, x + width/2, y + height/2, math.pi)
 
 end
 
