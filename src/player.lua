@@ -81,6 +81,7 @@ local function getHit(self)
     -- love.event.quit(0)
     soundManager.playSound(shipExplosionSound)
     globalGameState = 'gameOver'
+    music:stop()
   else
     soundManager.playSound(shipDamageSound)
   end

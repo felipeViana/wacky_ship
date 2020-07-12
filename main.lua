@@ -17,6 +17,9 @@ function love.load()
   shipDamageSound = love.audio.newSource("assets/shipDamage.wav", "static")
   shipExplosionSound = love.audio.newSource("assets/shipExplosion.wav", "static")
 
+  music = love.audio.newSource("assets/mainTheme.wav", "stream")
+  music:setLooping(true)
+
   greenShipImage = love.graphics.newImage("assets/greenShip.png")
 
   enemyManager:load()
@@ -38,6 +41,10 @@ function love.update(dt)
 end
 
 function love.draw()
+  if DEBUG then
+    love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 0, 100)
+  end
+
   if globalGameState == 'menu' then
     menu.draw(timePassed)
   end
@@ -83,11 +90,13 @@ local function restartTheGame()
   globalWave = 0
 
   player:reset()
+  music:play()
 end
 
 function love.keypressed(key)
   if globalGameState == 'menu' and key == 'return' then
     globalGameState = 'inGame'
+    music:play()
   end
 
   if globalGameState == 'inGame' then
