@@ -17,7 +17,7 @@ function love.load()
   shipDamageSound = love.audio.newSource("assets/shipDamage.wav", "static")
   shipExplosionSound = love.audio.newSource("assets/shipExplosion.wav", "static")
 
-  greenShipImage = love.graphics.newImage("assets/greenShip.jpeg")
+  greenShipImage = love.graphics.newImage("assets/greenShip.png")
 
   enemyManager:load()
   player:load()
